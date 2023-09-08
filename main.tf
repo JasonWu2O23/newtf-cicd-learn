@@ -6,7 +6,7 @@ resource "aws_instance" "Jinqing-Server" {
   key_name = "JinqingKeyPair" # Use a key created previously on AWS
   associate_public_ip_address = "true"
   subnet_id = "subnet-027c8f2bf5bd91bd8" # points to the subnet from the used VPC                                       
-  vpc_security_group_ids = "jinqing_allow_http_https_ssh_traffic_2" # Points to a previously created security group
+  vpc_security_group_ids = ["sg-062be99ddcfe2f881"] # Points to a previously created security group on AWS
  
   tags = {
     Name = "Jinqing Server ${count.index + 1}"

@@ -11,6 +11,7 @@ resource "aws_instance" "Jinqing-Server" {
   tags = {
     Name = "Jinqing Server ${count.index + 1}"
     Demo = "FIS"
+    Version = "2"
   }
 }
 

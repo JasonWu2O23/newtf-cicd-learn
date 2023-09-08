@@ -15,6 +15,38 @@ resource "aws_instance" "Jinqing-Server" {
   }
 }
 
+resource "aws_security_group" "jinqing_allow_https_ssh" {
+  name        = "jinqing_allow_https_ssh"
+  description = "Allow inbound traffic for https and ssh"
+
+  ingress {
+    description      = "HTTPS inbound"
+    from_port        = 443
+    to_port          = 443
+    protocol         = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  ingress {
+    description      = "SSH inbound"
+    from_port        = 22
+    to_port          = 22
+    protocol         = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  egress {
+    from_port        = 0
+    to_port          = 0
+    protocol         = "-1" # Equivalent to all
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  tags = {
+    Name = "allow_tls"
+  }
+}
+
 terraform {
   backend "s3" {
     bucket = "sctp-ce3-tfstate-bucket"
